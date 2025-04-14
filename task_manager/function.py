@@ -5,24 +5,33 @@ import sys
 def modify(sql,values):
    
     try:    
-        mycurser = con.database.cursor()
-        mycurser.execute(sql,values)
+        command = con.database.cursor()
+        command.execute(sql,values)
         con.database.commit()
-    except:
-        print("Oops!",sys.exc_info()[0],"occured.")
-        print("Next entry.")
-        print()    
+        
+        count = command.rowcount
+        return count
+    except connector.Error as err:
+            print("Database error occurred:", err)
+            return 0
+    except Exception as e:
+            print("Oops!", sys.exc_info()[0], "occurred.")
+            print("Details:", e)
+            return 0   
         
 def fetch(sql,data=None):
     
     try:
-        connection = con.database.cursor(dictionary=True)
+        command = con.database.cursor(dictionary=True)
         if data!= None:
-            print("dat")
-            connection.execute(sql,data)
+            print(data)
+            command.execute(sql,data)
         else:
-            connection.execute(sql)
-            return connection.fetchall()
+            command.execute(sql)
+        return command.fetchall()
+    except connector.Error as err:
+            print("Database error occurred:", err)
+            return 0
     except:
         print("Oops!",sys.exc_info()[0],"occured.")
         print("Next entry.")

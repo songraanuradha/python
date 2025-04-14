@@ -7,16 +7,20 @@ import connection as con
 import mysql.connector as conneter
 import sys
   
-def modify(sql,values):
+def modify(sql,data):
     try: 
-        mycurser = con.database.cursor()
+        command = con.database.cursor()
         
-        mycurser.execute(sql,values)
+        command.execute(sql,data)
         
         con.database.commit()
+        count = command.rowcount
+        return count
         
     except conneter.errors as e :
         print(e.msg)
+        print("value error")
+        return -1
     
 def fetch(sql,data=None):
     try:   
