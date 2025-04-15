@@ -1,0 +1,16 @@
+2. Simple Task Manager
+Description:
+Track your personal or work tasks.
+
+Table: tasks
+Fields:
+- id (INTEGER, PRIMARY KEY, AUTOINCREMENT)
+- title (TEXT)
+- description (TEXT)
+- due_date (TEXT)
+- status (TEXT: Pending/Done)
+
+Features:
+- Add, update, delete tasks
+- Mark tasks as done or pending
+- View tasks by status or due date
